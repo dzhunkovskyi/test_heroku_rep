@@ -26,7 +26,7 @@ SECRET_KEY = 'zzw#(z0tyk7t$vr))#-@cc9df%%i5jdz%o+3jqyixtipqcd)m%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['guarded-ravine-82442.herokuapp.com',]
+ALLOWED_HOSTS = ['guarded-ravine-82442.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -129,8 +129,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# try:
-#     from .dev_settings import *
-# #    print('DEV_SETTINGS!')
-# except ImportError:
-#     pass
+try:
+    from .dev_settings import *
+except ImportError:
+    pass
