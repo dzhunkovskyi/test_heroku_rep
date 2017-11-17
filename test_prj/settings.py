@@ -123,7 +123,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+
 try:
-    from dev_settings import *
+    from .dev_settings import *
+    print('DEV_SETTINGS!')
 except ImportError:
     pass
