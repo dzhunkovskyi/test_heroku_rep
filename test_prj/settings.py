@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['guarded-ravine-82442.herokuapp.com',]
 # Application definition
 
 INSTALLED_APPS = [
+    'posts',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -116,10 +117,12 @@ USE_TZ = True
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
-
+STATICFILES_DIRS = (
+        os.path.join(PROJECT_ROOT, 'static')
+    )
 
 try:
     from .dev_settings import *
-    print('DEV_SETTINGS!')
+#    print('DEV_SETTINGS!')
 except ImportError:
     pass
