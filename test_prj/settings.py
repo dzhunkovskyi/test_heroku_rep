@@ -74,8 +74,19 @@ WSGI_APPLICATION = 'test_prj.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
-
-DATABASES = {'default': dj_database_url.config()}
+if DEBUG:
+    DATABASES = {'default': dj_database_url.config()}
+else:
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'proj_db',
+        'USER': 'valera',
+        'PASSWORD': 'password123',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
 
 
 # Password validation
@@ -118,8 +129,8 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-try:
-    from .dev_settings import *
-#    print('DEV_SETTINGS!')
-except ImportError:
-    pass
+# try:
+#     from .dev_settings import *
+# #    print('DEV_SETTINGS!')
+# except ImportError:
+#     pass
