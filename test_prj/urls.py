@@ -15,13 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from .settings import DEBUG
 
 urlpatterns = [
     url(r'^', include('posts.urls')),
     url(r'^admin/', admin.site.urls),
 ]
 
-if not settings.DEBUG:
+if not DEBUG:
     urlpatterns += patterns('',
         (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     )
