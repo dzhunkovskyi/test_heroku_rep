@@ -135,7 +135,7 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    ('static', 'https://guarded-ravine-82442.herokuapp.com/app/test_prj/static'),
+    ('static', 'app/test_prj/static'),
 )
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
