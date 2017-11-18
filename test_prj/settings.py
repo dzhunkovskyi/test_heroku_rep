@@ -26,7 +26,7 @@ SECRET_KEY = 'zzw#(z0tyk7t$vr))#-@cc9df%%i5jdz%o+3jqyixtipqcd)m%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['guarded-ravine-82442.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['guarded-ravine-82442.herokuapp.com', '127.0.0.1', '0.0.0.0']
 
 
 # Application definition
@@ -128,6 +128,11 @@ USE_TZ = True
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_ROOT = BASE_DIR
+MEDIA_URL = '/media/'
+
+
 
 try:
     from .dev_settings import *

@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Main Page</title>
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+</head>
+<h1>LIST OF POSTS</h1>
+<body>
+	<h1>LIST OF POSTS</h1>
+	{% for post in list_of_posts %}
+		<li>
+			<h2>{{ post.post_title }}<h2>
+			<p>{{ post.post_content }}</p>
+			<h1>{{ post.post_image }}</h1>
+			<img src="{% static post.post_image %}" alt="image"/>
+			<!--<img src="{% static 'post2image.jpg' %}" alt="image"/>
+			<img src="{% static 'pink_flowers_with_bees_hd_picture_166824.jpg' %}" alt="image"/>
+			<img src="{% static 'pink_flowers_with_bees_hd_picture_166824.jpg' %}" alt="image"/>
+			-->
+			<p>-------------------------------------</p>
+		</li><br>
+	{% endfor %}
+</body>
+</html>
