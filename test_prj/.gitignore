@@ -1,5 +1,5 @@
 venv
 *.pyc
-staticfiles
+.jpg
 .env
 dev_settings.py
