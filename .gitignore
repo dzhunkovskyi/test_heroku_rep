@@ -1,0 +1,5 @@
+venv
+*.pyc
+.jpg
+.env
+dev_settings.py
