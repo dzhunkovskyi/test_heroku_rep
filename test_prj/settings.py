@@ -135,11 +135,10 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    ('static', 'app/test_prj/static'),
+    os.path.join(PROJECT_ROOT, 'test_prj/static'),
 )
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 
 
 try:
