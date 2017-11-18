@@ -1,1 +1,1 @@
-web:python manage.py collectstatic --noinput; gunicorn test_prj.wsgi --log-file -
+web: gunicorn test_prj.wsgi --log-file -
