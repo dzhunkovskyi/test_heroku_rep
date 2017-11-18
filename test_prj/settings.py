@@ -24,7 +24,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'zzw#(z0tyk7t$vr))#-@cc9df%%i5jdz%o+3jqyixtipqcd)m%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['guarded-ravine-82442.herokuapp.com', '127.0.0.1', '0.0.0.0']
 
