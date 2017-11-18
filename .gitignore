@@ -1,5 +1,5 @@
 venv
 *.pyc
-.jpg
+*.jpg
 .env
 dev_settings.py
