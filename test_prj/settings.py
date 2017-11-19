@@ -142,6 +142,11 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'testovoemulo@gmail.com'
+EMAIL_HOST_PASSWORD = '123password123'
+EMAIL_PORT = 587
 
 try:
     from .dev_settings import *
