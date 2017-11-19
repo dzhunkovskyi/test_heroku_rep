@@ -9,9 +9,9 @@
 	<div>
 		{% if username %}
 			<h1>Hello, {{username}}!</h1>
-			<h5><a href="http://127.0.0.1:8001/logout/">Logout</a></h5>
+			<h5><a href="/logout/">Logout</a></h5>
 		{% else %}
-			<h5><a href="http://127.0.0.1:8001/login/">Login</a></h5>
+			<h5><a href="/login/">Login</a></h5>
 		{% endif %}
 		<h1>LIST OF POSTS</h1>
 		{% for post in list_of_posts %}
