@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.contrib.admin import widgets
+from .models import Comments
 
 
 class SignupForm(UserCreationForm):
@@ -14,3 +15,9 @@ class SignupForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2', 'birthday',
         		  'country', 'city')
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comments
+        fields = ['comments_text']

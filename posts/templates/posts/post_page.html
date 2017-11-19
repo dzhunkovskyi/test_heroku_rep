@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Post_page</title>
+</head>
+<body>
+	<div>
+		{% if username %}
+			<h1>Hello, {{username}}!</h1>
+			<h5><a href="/logout/">Logout</a></h5>
+		{% else %}
+			<h5><a href="/login/">Login</a></h5>
+		{% endif %}
+	</div>
+	<div>
+		<h2><a href="/post/{{ post.id }}/">{{ post.post_title }}</a><h2>
+		<p>{{ post.post_content }}</p>
+				
+		<img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/Oxalis_tetraphylla_flower.jpg/640px-Oxalis_tetraphylla_flower.jpg" alt="image"/>
+		<h2>Likes : {{ post.post_likes }}</h2>
+		<p>---------------------------------------------------------------------</p>
+		{% for comment in comments %}
+    		<h3>{{ comment.name_of_user }}</h3>
+			<p>---------------------------------------------------------------------</p>
+    		<h4>{{ comment.comments_text }}</h4>
+		<p>---------------------------------------------------------------------</p>
+		{% endfor %}
+		<p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
+		
+		<div>
+	        <div class="row">
+	            <ul class="pagination">
+	                {% if comments.has_previous %}
+	                    <li class="arrow"><a href="/post/{{ post.id }}/{{ comments.previous_page_number }}/">&laquo;</a></li>
+	                {% else %}
+	                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+	                {% endif %}
+	                {% for comment in comments.paginator.page_range %}
+	                    {% if comment == comments.number %}
+	                        <li class="current"><a href="/post/{{ post.id }}/{{ comment }}/">{{ comment }}</a></li>
+	                    {% else %}
+	                        <li><a href="/post/{{ post.id }}/{{ comment }}/">{{ comment }}</a></li>
+	                    {% endif %}
+	                {% endfor %}
+	                {% if comments.has_next %}
+	                    <li class="arrow"><a href="/post/{{ post.id }}/{{ comments.next_page_number }}/">&raquo;</a></li>
+	                {% else %}
+	                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+	                {% endif %}
+	            </ul>
+	        </div>
+    	</div>
+
+
+
+
+
+		{% if username %}
+    		<form action="/addcomment/{{ post.id }}/" method="post">
+				{% csrf_token %}
+				{{ form }}
+				<input type="submit" value="Add comment">
+			</form>
+    	{% endif %}
+		<p>-------------------------------------</p>
+	</div><br>
+</body>
+</html>

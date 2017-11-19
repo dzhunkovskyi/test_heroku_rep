@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from .models import Post
+from .models import Post, Comments
+from .forms import CommentForm
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, render_to_response
@@ -28,6 +29,22 @@ def main(request, page_number=1):
 		context['username'] = username		
 	context['list_of_posts'] = current_page.page(page_number)
 	return render(request, 'posts/main.html', context)
+
+
+def post(request, post_id, page_number=1):
+	context = {}
+	post = Post.objects.get(id=post_id) # identify which manager you want
+	comments = post.comments_set.all()
+	comment_form = CommentForm()
+	username = request.user.username
+	post = Post.objects.get(id=post_id)
+	comments_list = Comments.objects.all()
+	current_page = Paginator(comments_list, 2)
+	context['form'] = comment_form
+	context['post'] = post
+	context['username'] = username
+	context['comments'] = current_page.page(page_number)
+	return render(request, 'posts/post_page.html', context)
 
 
 def signup(request):
@@ -118,3 +135,21 @@ def addlike(request, post_id):
 		post.delete_user(username)
 		post.save()
 	return redirect('/')
+
+
+def addcomment(request, post_id):
+	args = {}
+	username = request.user.username
+	args.update(csrf(request))
+	if request.POST:
+		form = CommentForm(request.POST)
+		if form.is_valid():
+			comment = form.save(commit=False)
+			comment.name_of_user = username
+			comment.comment_post = Post.objects.get(id=post_id)
+			comment.comments_post_id = post_id
+			print('COMMENT_POST = ', comment.comment_post)
+			form.save()
+			request.session.set_expiry(60)
+			request.session['bla'] = True
+		return redirect('/post/%s/' % post_id)

@@ -28,3 +28,9 @@ class Post(models.Model):
 	def return_list_of_user(self):
 		list_of_user = json.loads(self.post_users_liked)
 		return list_of_user
+
+class Comments(models.Model):
+
+	comments_text = models.TextField(default='')
+	comments_post = models.ForeignKey(Post)
+	name_of_user = models.CharField(default='', max_length=100)

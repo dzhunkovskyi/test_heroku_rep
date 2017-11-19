@@ -4,7 +4,7 @@
 <head>
 	<title>Main Page</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 </head>
 <body>
 	<div>
@@ -21,7 +21,7 @@
 
 		{% for post in list_of_posts %}
 			<li>
-				<h2>{{ post.post_title }}<h2>
+				<h2><a href="/post/{{ post.id }}/1/">{{ post.post_title }}</a><h2>
 				<p>{{ post.post_content }}</p>
 				
 				<img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/Oxalis_tetraphylla_flower.jpg/640px-Oxalis_tetraphylla_flower.jpg" alt="image"/>
