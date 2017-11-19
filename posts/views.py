@@ -22,7 +22,7 @@ from django.core.paginator import Paginator
 def main(request, page_number=1):
 	print('MAIN')
 	context = {}
-	posts_list = Post.objects.all().order_by('-post_title')
+	posts_list = Post.objects.all().order_by('-post_date')
 	current_page = Paginator(posts_list, 2)
 	username = request.user.username
 	if username:
@@ -38,7 +38,7 @@ def post(request, post_id, page_number=1):
 	comment_form = CommentForm()
 	username = request.user.username
 	post = Post.objects.get(id=post_id)
-	comments_list = Comments.objects.all()
+	comments_list = Comments.objects.all().order_by('-post_date')
 	current_page = Paginator(comments_list, 2)
 	context['form'] = comment_form
 	context['post'] = post
@@ -152,4 +152,4 @@ def addcomment(request, post_id):
 			form.save()
 			request.session.set_expiry(60)
 			request.session['bla'] = True
-		return redirect('/post/%s/' % post_id)
+		return redirect('/post/%s/1/' % post_id)

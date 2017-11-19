@@ -34,3 +34,4 @@ class Comments(models.Model):
 	comments_text = models.TextField(default='')
 	comments_post = models.ForeignKey(Post)
 	name_of_user = models.CharField(default='', max_length=100)
+	post_date = models.DateTimeField(default=datetime.now)
