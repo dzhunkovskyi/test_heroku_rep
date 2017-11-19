@@ -4,6 +4,7 @@
 <head>
 	<title>Main Page</title>
 	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
 	<div>
@@ -14,16 +15,60 @@
 			<h5><a href="/login/">Login</a></h5>
 		{% endif %}
 		<h1>LIST OF POSTS</h1>
+
+
+
+
 		{% for post in list_of_posts %}
 			<li>
 				<h2>{{ post.post_title }}<h2>
 				<p>{{ post.post_content }}</p>
-				<h1>IMAGE PATH: {{ post.post_image.path }}</h1>
-				<h1>{{ post.post_image }}</h1>
-				<img src="{% static post.post_image %}" alt="image"/>
+				
+				<!-- <h1>IMAGE PATH: {{ post.post_image.path }}</h1>
+				<h1>{{ post.post_image }}</h1> -->
+				<!-- <img src="{% static post.post_image %}" alt="image"/> -->
+				
+				<img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/Oxalis_tetraphylla_flower.jpg/640px-Oxalis_tetraphylla_flower.jpg" alt="image"/>
 				<p>-------------------------------------</p>
 			</li><br>
 		{% endfor %}
+
+		<!-- {% if list_of_posts.has_previous %}
+			<h4>PREVIOUS PAGE NUMBER {{ list_of_posts.previous_page_number }}</h4>
+		{% endif %}
+		{% if list_of_posts.has_next %}
+			<h4>NEXT PAGE NUMBER {{ list_of_posts.next_page_number }}</h4>
+		{% endif %} -->
+		
+
+			<div>
+		        <div class="row">
+		            <ul class="pagination">
+		                {% if list_of_posts.has_previous %}
+		                    <li class="arrow"><a href="/{{ list_of_posts.previous_page_number }}/">&laquo;</a></li>
+		                {% else %}
+		                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+		                {% endif %}
+		                {% for page in list_of_posts.paginator.page_range %}
+		                    {% if page == list_of_posts.number %}
+		                        <li class="current"><a href="/{{ page }}/">{{ page }}</a></li>
+		                    {% else %}
+		                        <li><a href="/{{ page }}/">{{ page }}</a></li>
+		                    {% endif %}
+		                {% endfor %}
+		                {% if list_of_posts.has_next %}
+		                    <li class="arrow"><a href="/{{ list_of_posts.next_page_number }}/">&raquo;</a></li>
+		                {% else %}
+		                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+		                {% endif %}
+		            </ul>
+		        </div>
+    		</div>
+
+
+    		<h1></h1>
+    		<h1></h1>
+    		<h1></h1>
 	</h2>
 </body>
 </html>

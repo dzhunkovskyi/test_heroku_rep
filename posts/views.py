@@ -14,17 +14,18 @@ from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
 from django.template.context_processors import csrf
-
+from django.core.paginator import Paginator
 # Create your views here.
 
 
-def main(request):
+def main(request, page_number=1):
 	context = {}
 	posts_list = Post.objects.all()
+	current_page = Paginator(posts_list, 2)
 	username = request.user.username
 	if username:
 		context['username'] = username		
-	context['list_of_posts'] = posts_list
+	context['list_of_posts'] = current_page.page(page_number)
 	return render(request, 'posts/main.html', context)
 
 
