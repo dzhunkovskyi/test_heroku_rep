@@ -6,16 +6,24 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
 </head>
 <body>
-	<h1>LIST OF POSTS</h1>
-	{% for post in list_of_posts %}
-		<li>
-			<h2>{{ post.post_title }}<h2>
-			<p>{{ post.post_content }}</p>
-			<h1>IMAGE PATH: {{ post.post_image.path }}</h1>
-			<h1>{{ post.post_image }}</h1>
-			<img src="{% static post.post_image %}" alt="image"/>
-			<p>-------------------------------------</p>
-		</li><br>
-	{% endfor %}
+	<div>
+		{% if username %}
+			<h1>Hello, {{username}}!</h1>
+			<h5><a href="http://127.0.0.1:8001/logout/">Logout</a></h5>
+		{% else %}
+			<h5><a href="http://127.0.0.1:8001/login/">Login</a></h5>
+		{% endif %}
+		<h1>LIST OF POSTS</h1>
+		{% for post in list_of_posts %}
+			<li>
+				<h2>{{ post.post_title }}<h2>
+				<p>{{ post.post_content }}</p>
+				<h1>IMAGE PATH: {{ post.post_image.path }}</h1>
+				<h1>{{ post.post_image }}</h1>
+				<img src="{% static post.post_image %}" alt="image"/>
+				<p>-------------------------------------</p>
+			</li><br>
+		{% endfor %}
+	</h2>
 </body>
 </html>
