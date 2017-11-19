@@ -19,8 +19,9 @@ from django.core.paginator import Paginator
 
 
 def main(request, page_number=1):
+	print('MAIN')
 	context = {}
-	posts_list = Post.objects.all()
+	posts_list = Post.objects.all().order_by('-post_title')
 	current_page = Paginator(posts_list, 2)
 	username = request.user.username
 	if username:
@@ -91,3 +92,29 @@ def login_func(request):
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+
+def addlike(request, post_id):
+	print('ADDLIKE!')
+	username = request.user.username
+	print('username=', username)
+	post = Post.objects.get(id=post_id)
+	# user = User.objects.get(username=username)
+	# if username and user not in technik.users_liked.all():
+	if username not in post.return_list_of_user():
+		print('+')
+		print('post.return_list_of_user()', post.return_list_of_user())
+		print('post_rate=', post.post_likes)
+		post.post_likes += 1
+		print('post_rate=', post.post_likes)
+		post.add_user(username)
+		post.save()
+	else:
+		print('-')
+		print('post.return_list_of_user() = ', post.return_list_of_user())
+		print('post_rate=', post.post_likes)
+		post.post_likes -= 1
+		print('post_rate=', post.post_likes)
+		post.delete_user(username)
+		post.save()
+	return redirect('/')

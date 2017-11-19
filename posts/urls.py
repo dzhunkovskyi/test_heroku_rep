@@ -6,6 +6,7 @@ app_name = 'posts'
 
 urlpatterns = [
     url(r'^(?P<page_number>\d+)/$', views.main, name='main'),
+    url(r'^addlike/(?P<post_id>\d+)/$', views.addlike, name='addlike'),
     url(r'^login/', views.login_func, name='login_func'),
     url(r'^logout/', views.logout, name='logout'),
     url(r'^signup/$', views.signup, name='signup'),
