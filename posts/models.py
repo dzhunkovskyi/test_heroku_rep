@@ -10,7 +10,8 @@ class Post(models.Model):
 	post_content = models.TextField(default='')
 	post_likes = models.IntegerField(default=0)
 	post_users_liked = models.CharField(default='[]', max_length=200)
-	post_image = models.ImageField(upload_to='static')
+	# post_image = models.ImageField(upload_to='static')
+	post_image_url = models.CharField(default='', max_length=400)
 	post_date = models.DateTimeField(default=datetime.now)
 
 	def add_user(self, user_name):
