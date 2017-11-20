@@ -22,12 +22,17 @@ from django.core.paginator import Paginator
 def main(request, page_number=1):
 	print('MAIN')
 	context = {}
-	posts_list = Post.objects.all().order_by('-post_date')
-	current_page = Paginator(posts_list, 2)
 	username = request.user.username
+	user_like_list = []
+	posts_list = Post.objects.all().order_by('-post_date')
+	for post in posts_list:
+		if username in post.return_list_of_user():
+			user_like_list.append(post.id)
+	current_page = Paginator(posts_list, 2)
 	if username:
 		context['username'] = username		
 	context['list_of_posts'] = current_page.page(page_number)
+	context['user_like_list'] = user_like_list
 	return render(request, 'posts/main.html', context)
 
 
