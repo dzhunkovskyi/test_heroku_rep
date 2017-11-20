@@ -26,7 +26,7 @@
             		<figcaption>
 							<h4>Like: {{ post.post_likes }}</h4>
                 		<h3>{{ post.post_title }}</h3>
-                		<p>{{ post.post_content }}</p>
+                		<p>{{ post.post_content|safe }}</p>
             		</figcaption>
         		</figure>
 			</li><br>
