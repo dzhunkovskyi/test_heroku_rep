@@ -2,9 +2,36 @@
 <html>
 <head>
 	<title>Post_page</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-	<div>
+
+	<ul class="thumbnails">
+		{% if username %}
+			<div class="well inline-headers">
+				<h1>Hello, {{username}}!</h1>
+				<h5><a href="/logout/">Logout</a></h5>
+			</div>
+		{% else %}
+			<h5><a href="/login/">Login</a></h5>
+		{% endif %}
+		<hr>
+			<li class='span3'>
+				<figure>
+            		<img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/Oxalis_tetraphylla_flower.jpg/640px-Oxalis_tetraphylla_flower.jpg" width='300px' height="200px" alt="3 column placeholder" />
+            		<figcaption>
+							<h4>Like: {{ post.post_likes }}</h4>
+                		<h5>{{ post.post_title }}</h5>
+                		<p>{{ post.post_content }}</p>
+            		</figcaption>
+        		</figure>
+			</li><br>
+			<hr>
+	</ul>
+
+
+
+	<!-- <div>
 		{% if username %}
 			<h1>Hello, {{username}}!</h1>
 			<h5><a href="/logout/">Logout</a></h5>
@@ -17,8 +44,56 @@
 		<p>{{ post.post_content }}</p>
 				
 		<img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/Oxalis_tetraphylla_flower.jpg/640px-Oxalis_tetraphylla_flower.jpg" alt="image"/>
-		<h2>Likes : {{ post.post_likes }}</h2>
-		<p>---------------------------------------------------------------------</p>
+		<h2>Likes : {{ post.post_likes }}</h2> -->
+		<ul class="thumbnails">
+			<h3>Comments</h3>
+			<hr>
+			{% for comment in comments %}
+				<li class='span3'>
+					<figure>
+	            		<figcaption>
+	                		<h5>{{ comment.name_of_user }}</h5>
+	                		<p>{{ comment.comments_text }}</p>
+	            		</figcaption>
+	        		</figure>
+				</li><br>
+				<hr>
+			{% endfor %}
+			<div>
+		        <div class="row">
+		            <ul class="pagination">
+		                {% if comments.has_previous %}
+		                    <li class="arrow"><a href="/post/{{ post.id }}/{{ comments.previous_page_number }}/">&laquo;</a></li>
+		                {% else %}
+		                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+		                {% endif %}
+		                {% for comment in comments.paginator.page_range %}
+		                    {% if comment == comments.number %}
+		                        <li class="current"><a href="/post/{{ post.id }}/{{ comment }}/">{{ comment }}</a></li>
+		                    {% else %}
+		                        <li><a href="/post/{{ post.id }}/{{ comment }}/">{{ comment }}</a></li>
+		                    {% endif %}
+		                {% endfor %}
+		                {% if comments.has_next %}
+		                    <li class="arrow"><a href="/post/{{ post.id }}/{{ comments.next_page_number }}/">&raquo;</a></li>
+		                {% else %}
+		                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+		                {% endif %}
+		            </ul>
+		        </div>
+    		</div>
+    		{% if username %}
+    		<form action="/addcomment/{{ post.id }}/1/" method="post">
+				{% csrf_token %}
+				{{ form }}
+				<input type="submit" value="Add comment">
+			</form>
+    	{% endif %}
+		</ul>
+
+
+
+		<!-- <p>---------------------------------------------------------------------</p>
 		{% for comment in comments %}
     		<h3>{{ comment.name_of_user }}</h3>
 			<p>---------------------------------------------------------------------</p>
@@ -63,6 +138,6 @@
 			</form>
     	{% endif %}
 		<p>-------------------------------------</p>
-	</div><br>
+	</div><br> -->
 </body>
 </html>

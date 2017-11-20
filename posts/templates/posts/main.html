@@ -3,24 +3,25 @@
 <html>
 <head>
 	<title>Main Page</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" /> -->
+	<!-- <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}"> -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 <body>
-	<div>
-		{% if username %}
+	<!-- <div> -->
+		<!-- {% if username %}
 			<h1>Hello, {{username}}!</h1>
 			<h5><a href="/logout/">Logout</a></h5>
 		{% else %}
 			<h5><a href="/login/">Login</a></h5>
 		{% endif %}
-		<h1>LIST OF POSTS</h1>
+		<h1>LIST OF POSTS</h1> -->
 
 
 
 
-		{% for post in list_of_posts %}
-			<li>
+		<!-- {% for post in list_of_posts %}
+			<li class='span'>
 				<h2><a href="/post/{{ post.id }}/1/">{{ post.post_title }}</a><h2>
 				<p>{{ post.post_content }}</p>
 				
@@ -29,9 +30,9 @@
 				{% if username %}
 					<h3><a href="/addlike/{{ post.id }}/">Like</a></h3>
 				{% endif %}
-				<p>-------------------------------------</p>
+				
 			</li><br>
-		{% endfor %}
+		{% endfor %} -->
 
 		<!-- {% if list_of_posts.has_previous %}
 			<h4>PREVIOUS PAGE NUMBER {{ list_of_posts.previous_page_number }}</h4>
@@ -41,7 +42,7 @@
 		{% endif %} -->
 		
 
-			<div>
+			<!-- <div margin-left='100px'>
 		        <div class="row">
 		            <ul class="pagination">
 		                {% if list_of_posts.has_previous %}
@@ -69,6 +70,61 @@
     		<h1></h1>
     		<h1></h1>
     		<h1></h1>
-	</h2>
+	</h2> -->
+
+
+	<ul class="thumbnails">
+		{% if username %}
+			<div class="well inline-headers">
+				<h1>Hello, {{username}}!</h1>
+				<h5><a href="/logout/">Logout</a></h5>
+			</div>
+		{% else %}
+			<h5><a href="/login/">Login</a></h5>
+		{% endif %}
+		<hr>
+		<h1>LIST OF POSTS</h1>
+		<hr>
+		{% for post in list_of_posts %}
+			<li class='span3'>
+				<figure>
+            		<img src="https://upload.wikimedia.org/wikipedia/en/thumb/3/3f/Oxalis_tetraphylla_flower.jpg/640px-Oxalis_tetraphylla_flower.jpg" width='300px' height="200px" alt="3 column placeholder" />
+            		<figcaption>
+            			{% if username %}
+							<h4><a href="/addlike/{{ post.id }}/">Like </a>{{ post.post_likes }}</h4>
+						{% endif %}
+                		<h5><a href="/post/{{ post.id }}/1/">{{ post.post_title }}</a></h5>
+                		<p>{{ post.post_content }}</p>
+            		</figcaption>
+        		</figure>
+			</li><br>
+			<hr>
+		{% endfor %}
+		<div margin-left='100px'>
+		        <div class="row">
+		            <ul class="pagination">
+		                {% if list_of_posts.has_previous %}
+		                    <li class="arrow"><a href="/{{ list_of_posts.previous_page_number }}/">&laquo;</a></li>
+		                {% else %}
+		                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+		                {% endif %}
+		                {% for page in list_of_posts.paginator.page_range %}
+		                    {% if page == list_of_posts.number %}
+		                        <li class="current"><a href="/{{ page }}/">{{ page }}</a></li>
+		                    {% else %}
+		                        <li><a href="/{{ page }}/">{{ page }}</a></li>
+		                    {% endif %}
+		                {% endfor %}
+		                {% if list_of_posts.has_next %}
+		                    <li class="arrow"><a href="/{{ list_of_posts.next_page_number }}/">&raquo;</a></li>
+		                {% else %}
+		                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+		                {% endif %}
+		            </ul>
+		        </div>
+    		</div>
+	</ul>
+
+
 </body>
 </html>
