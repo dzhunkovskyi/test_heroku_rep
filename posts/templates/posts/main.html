@@ -72,14 +72,15 @@
 
 
 	<ul class="thumbnails">
+		<div class="well inline-headers">
 		{% if username %}
-			<div class="well inline-headers">
 				<h1>Hello, {{username}}!</h1>
 				<h5><a href="/logout/">Logout</a></h5>
-			</div>
 		{% else %}
 			<h5><a href="/login/">Login</a></h5>
+			<h5><a href="/signup/">Register</a></h5>
 		{% endif %}
+		</div>
 		<hr>
 		<h1>LIST OF POSTS</h1>
 		<hr>
